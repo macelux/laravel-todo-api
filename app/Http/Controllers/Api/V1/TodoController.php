@@ -29,24 +29,24 @@ class TodoController extends Controller
 
         $todos = $this->todoService->createTodo($validated_request);
 
-        return $this->responseJson(true, 200, $todos);
+        return $this->responseJson(true, 201,'Todo created',  $todos);
     }
 
     public function update(Request $request, $id): JsonResponse
     {
         $validated_request = $request->validate([
-            'todo' => 'required'
+            'title' => 'required'
         ]);
 
         $todos = $this->todoService->updateTodo($validated_request, $id);
 
-        return $this->responseJson(true, 200, $todos);
+        return $this->responseJson(true, 200, 'Todo updated'  , $todos);
     }
 
     public function destroy($id): JsonResponse
     {
         $todos = $this->todoService->deleteTodo($id);
 
-        return $this->responseJson(true, 200, $todos);
+        return $this->responseJson(true, 200, 'Todo deleted',  $todos);
     }
 }
