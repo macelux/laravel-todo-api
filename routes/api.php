@@ -19,8 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'todos'], function (){
-    Route::get('', [\App\Http\Controllers\Api\V1\TodoController::class, 'index']);
-    Route::post('', [\App\Http\Controllers\Api\V1\TodoController::class, 'store']);
-    Route::put('{id}', [\App\Http\Controllers\Api\V1\TodoController::class, 'update']);
-    Route::delete('{id}', [\App\Http\Controllers\Api\V1\TodoController::class, 'destroy']);
+    Route::get('', [\App\Http\Controllers\Api\V1\TodoController::class, 'index'])->name('todo.index');
+    Route::post('', [\App\Http\Controllers\Api\V1\TodoController::class, 'store'])->name('todo.create');
+    Route::put('{id}', [\App\Http\Controllers\Api\V1\TodoController::class, 'update'])->name('todo.update');
+    Route::delete('{id}', [\App\Http\Controllers\Api\V1\TodoController::class, 'destroy'])->name('todo.delete');
 });

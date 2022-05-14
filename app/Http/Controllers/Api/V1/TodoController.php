@@ -24,7 +24,7 @@ class TodoController extends Controller
     public function store(Request $request): JsonResponse
     {
         $validated_request = $request->validate([
-            'todo' => 'required'
+            'title' => 'required'
         ]);
 
         $todos = $this->todoService->createTodo($validated_request);
