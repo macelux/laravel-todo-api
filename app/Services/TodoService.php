@@ -18,6 +18,11 @@ class TodoService
         return $this->todo->query()->get();
     }
 
+    public function getCompleted($is_completed = true): Collection|array
+    {
+        return $this->todo->query()->where('completed', $is_completed)->get();
+    }
+
     public function createTodo(array $param): Builder|Model
     {
         return $this->todo->query()->create($param);

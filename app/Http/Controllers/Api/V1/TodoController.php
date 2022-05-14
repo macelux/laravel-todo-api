@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TodoResource;
 use App\Services\TodoService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,7 +19,21 @@ class TodoController extends Controller
     {
         $todos = $this->todoService->getTodos();
 
-        return $this->responseJson(true, 200, 'All todos fetched',$todos);
+        return $this->responseJson(true, 200, 'All todos fetched', TodoResource::collection($todos));
+    }
+
+    public function getCompleted(): JsonResponse
+    {
+        $todos = $this->todoService->getCompleted();
+
+        return $this->responseJson(true, 200, 'All completed todos fetched', TodoResource::collection($todos));
+    }
+
+    public function getOngoing(): JsonResponse
+    {
+        $todos = $this->todoService->getCompleted(false);
+
+        return $this->responseJson(true, 200, 'All Ongoing todos fetched', TodoResource::collection($todos));
     }
 
     public function store(Request $request): JsonResponse
