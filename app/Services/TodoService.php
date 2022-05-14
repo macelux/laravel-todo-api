@@ -15,12 +15,17 @@ class TodoService
 
     public function getTodos(): Collection|array
     {
-        return $this->todo->query()->get();
+        return $this->todo->query()
+            ->latest()
+            ->get();
     }
 
     public function getCompleted($is_completed = true): Collection|array
     {
-        return $this->todo->query()->where('completed', $is_completed)->get();
+        return $this->todo->query()
+            ->where('completed', $is_completed)
+            ->latest()
+            ->get();
     }
 
     public function createTodo(array $param): Builder|Model
